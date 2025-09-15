@@ -1,0 +1,90 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\tts\\ttsFirstProject\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9928E2CD-846B-4454-AEA6-927C69133942}|ttsFirstProject\\ttsFirstProject.vbproj|c:\\tts\\ttsfirstproject\\ttsfirstproject\\frmeditcustomer.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{9928E2CD-846B-4454-AEA6-927C69133942}|ttsFirstProject\\ttsFirstProject.vbproj|solutionrelative:ttsfirstproject\\frmeditcustomer.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9928E2CD-846B-4454-AEA6-927C69133942}|ttsFirstProject\\ttsFirstProject.vbproj|c:\\tts\\ttsfirstproject\\ttsfirstproject\\frmeditcustomer.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{9928E2CD-846B-4454-AEA6-927C69133942}|ttsFirstProject\\ttsFirstProject.vbproj|solutionrelative:ttsfirstproject\\frmeditcustomer.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9928E2CD-846B-4454-AEA6-927C69133942}|ttsFirstProject\\ttsFirstProject.vbproj|c:\\tts\\ttsfirstproject\\ttsfirstproject\\frmcustomers.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{9928E2CD-846B-4454-AEA6-927C69133942}|ttsFirstProject\\ttsFirstProject.vbproj|solutionrelative:ttsfirstproject\\frmcustomers.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9928E2CD-846B-4454-AEA6-927C69133942}|ttsFirstProject\\ttsFirstProject.vbproj|c:\\tts\\ttsfirstproject\\ttsfirstproject\\frmcustomers.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{9928E2CD-846B-4454-AEA6-927C69133942}|ttsFirstProject\\ttsFirstProject.vbproj|solutionrelative:ttsfirstproject\\frmcustomers.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 372,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FrmCustomers.vb",
+              "DocumentMoniker": "C:\\tts\\ttsFirstProject\\ttsFirstProject\\FrmCustomers.vb",
+              "RelativeDocumentMoniker": "ttsFirstProject\\FrmCustomers.vb",
+              "ToolTip": "C:\\tts\\ttsFirstProject\\ttsFirstProject\\FrmCustomers.vb",
+              "RelativeToolTip": "ttsFirstProject\\FrmCustomers.vb",
+              "ViewState": "AQIAABsAAAAAAAAAAAAYwCMAAACDAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-09-15T10:13:46.426Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "FrmCustomers.vb [Design]",
+              "DocumentMoniker": "C:\\tts\\ttsFirstProject\\ttsFirstProject\\FrmCustomers.vb",
+              "RelativeDocumentMoniker": "ttsFirstProject\\FrmCustomers.vb",
+              "ToolTip": "C:\\tts\\ttsFirstProject\\ttsFirstProject\\FrmCustomers.vb [Design]",
+              "RelativeToolTip": "ttsFirstProject\\FrmCustomers.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-09-15T11:32:25.342Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FrmEditCustomer.vb [Design]",
+              "DocumentMoniker": "C:\\tts\\ttsFirstProject\\ttsFirstProject\\FrmEditCustomer.vb",
+              "RelativeDocumentMoniker": "ttsFirstProject\\FrmEditCustomer.vb",
+              "ToolTip": "C:\\tts\\ttsFirstProject\\ttsFirstProject\\FrmEditCustomer.vb [Design]",
+              "RelativeToolTip": "ttsFirstProject\\FrmEditCustomer.vb [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-09-15T09:52:03.902Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FrmEditCustomer.vb",
+              "DocumentMoniker": "C:\\tts\\ttsFirstProject\\ttsFirstProject\\FrmEditCustomer.vb",
+              "RelativeDocumentMoniker": "ttsFirstProject\\FrmEditCustomer.vb",
+              "ToolTip": "C:\\tts\\ttsFirstProject\\ttsFirstProject\\FrmEditCustomer.vb",
+              "RelativeToolTip": "ttsFirstProject\\FrmEditCustomer.vb",
+              "ViewState": "AQIAABIAAAAAAAAAAAA1wBAAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2025-09-15T08:45:26.064Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
