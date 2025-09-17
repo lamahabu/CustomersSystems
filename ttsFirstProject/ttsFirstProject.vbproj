@@ -62,6 +62,7 @@
     <Reference Include="DevExpress.XtraPrinting.v24.1, Version=24.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -96,10 +97,17 @@
     <Compile Include="FrmCustomers.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FrmLogIn.Designer.vb">
+      <DependentUpon>FrmLogIn.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FrmLogIn.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -130,6 +138,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmCustomers.resx">
       <DependentUpon>FrmCustomers.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmLogIn.resx">
+      <DependentUpon>FrmLogIn.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\licenses.licx" />
     <EmbeddedResource Include="My Project\Resources.resx">

@@ -48,3 +48,4 @@ C:\tts\ttsFirstProject\ttsFirstProject\bin\Debug\DevExpress.XtraTreeList.v24.1.x
 C:\tts\ttsFirstProject\ttsFirstProject\bin\Debug\DevExpress.Office.v24.1.Core.xml
 C:\tts\ttsFirstProject\ttsFirstProject\obj\Debug\ttsFirstProject.FrmEditCustomer.resources
 C:\tts\ttsFirstProject\ttsFirstProject\obj\Debug\ttsFirstProject.FrmEditContact.resources
+C:\tts\ttsFirstProject\ttsFirstProject\obj\Debug\ttsFirstProject.FrmLogIn.resources

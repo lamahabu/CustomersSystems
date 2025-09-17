@@ -21,9 +21,11 @@ Public Class FrmEditCustomer
             Using con As New SqlConnection(connectionString)
                 con.Open()
 
-                Dim queryCustomer As String = "SELECT FirstName, Email, Phone, City FROM Customers WHERE CustomerID=@CustomerID"
-                Using cmd As New SqlCommand(queryCustomer, con)
+                ' --- Get Customer ---
+                Using cmd As New SqlCommand("GetCustomerById", con)
+                    cmd.CommandType = CommandType.StoredProcedure
                     cmd.Parameters.AddWithValue("@CustomerID", CustomerId.Value)
+
                     Using reader As SqlDataReader = cmd.ExecuteReader()
                         If reader.Read() Then
                             TextEdit1.Text = reader("FirstName").ToString()
@@ -34,10 +36,11 @@ Public Class FrmEditCustomer
                     End Using
                 End Using
 
-
-                Dim queryContacts As String = "SELECT ContactID, ContactName, Phone, CreatedAt FROM Contacts WHERE CustomerID=@CustomerID"
-                Using da As New SqlDataAdapter(queryContacts, con)
+                ' --- Get Contacts ---
+                Using da As New SqlDataAdapter("GetContactsByCustomerId", con)
+                    da.SelectCommand.CommandType = CommandType.StoredProcedure
                     da.SelectCommand.Parameters.AddWithValue("@CustomerID", CustomerId.Value)
+
                     Dim dt As New DataTable()
                     da.Fill(dt)
                     GridControl1.DataSource = dt
@@ -47,8 +50,8 @@ Public Class FrmEditCustomer
                 End Using
             End Using
         End If
-
     End Sub
+
 
     Private Sub Savebtn_Click(sender As Object, e As EventArgs) Handles Savebtn.Click
         Dim newCustomerId As Integer = 0
@@ -58,66 +61,64 @@ Public Class FrmEditCustomer
 
             Dim cmd As SqlCommand
 
-            ' --- Update existing customer ---
             If CustomerId.HasValue Then
-                Dim query As String = "UPDATE Customers SET FirstName=@FirstName, Email=@Email, Phone=@Phone, City=@City, UpdatedAt=GETDATE() WHERE CustomerID=@CustomerID"
-                cmd = New SqlCommand(query, con)
+                ' --- Update existing customer ---
+                cmd = New SqlCommand("UpdateCustomer", con)
+                cmd.CommandType = CommandType.StoredProcedure
                 cmd.Parameters.AddWithValue("@CustomerID", CustomerId.Value)
-                cmd.Parameters.AddWithValue("@FirstName", TextEdit1.Text)
-                cmd.Parameters.AddWithValue("@Email", TextEdit2.Text)
-                cmd.Parameters.AddWithValue("@Phone", TextEdit3.Text)
-                cmd.Parameters.AddWithValue("@City", TextEdit4.Text)
-                cmd.ExecuteNonQuery()
             Else
                 ' --- Insert new customer ---
-                Dim query As String = "INSERT INTO Customers (FirstName, Email, Phone, City) VALUES (@FirstName, @Email, @Phone, @City); SELECT SCOPE_IDENTITY();"
-                cmd = New SqlCommand(query, con)
-                cmd.Parameters.AddWithValue("@FirstName", TextEdit1.Text)
-                cmd.Parameters.AddWithValue("@Email", TextEdit2.Text)
-                cmd.Parameters.AddWithValue("@Phone", TextEdit3.Text)
-                cmd.Parameters.AddWithValue("@City", TextEdit4.Text)
+                cmd = New SqlCommand("InsertCustomer", con)
+                cmd.CommandType = CommandType.StoredProcedure
+            End If
+
+            cmd.Parameters.AddWithValue("@FirstName", TextEdit1.Text)
+            cmd.Parameters.AddWithValue("@Email", TextEdit2.Text)
+            cmd.Parameters.AddWithValue("@Phone", TextEdit3.Text)
+            cmd.Parameters.AddWithValue("@City", TextEdit4.Text)
+
+            If CustomerId.HasValue Then
+                cmd.ExecuteNonQuery()
+            Else
                 newCustomerId = Convert.ToInt32(cmd.ExecuteScalar())
                 CustomerId = newCustomerId
             End If
 
+            ' --- Save contacts ---
             Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(GridControl1.MainView, DevExpress.XtraGrid.Views.Grid.GridView)
-
             For i As Integer = 0 To view.RowCount - 1
                 Dim contactIdObj As Object = view.GetRowCellValue(i, "ContactID")
                 Dim contactName As String = view.GetRowCellValue(i, "ContactName").ToString()
                 Dim contactPhone As String = view.GetRowCellValue(i, "Phone").ToString()
 
-                ' --- If both columns are empty ---
                 If String.IsNullOrWhiteSpace(contactName) AndAlso String.IsNullOrWhiteSpace(contactPhone) Then
-                    ' If this contact exists in the database, delete it
+                    ' Delete if exists
                     If contactIdObj IsNot Nothing AndAlso contactIdObj IsNot DBNull.Value Then
-                        Dim contactId As Integer = Convert.ToInt32(contactIdObj)
-                        Dim queryDelete As String = "DELETE FROM Contacts WHERE ContactID=@ContactID"
-                        Using cmdDelete As New SqlCommand(queryDelete, con)
-                            cmdDelete.Parameters.AddWithValue("@ContactID", contactId)
+                        Using cmdDelete As New SqlCommand("DeleteContact", con)
+                            cmdDelete.CommandType = CommandType.StoredProcedure
+                            cmdDelete.Parameters.AddWithValue("@ContactID", Convert.ToInt32(contactIdObj))
                             cmdDelete.ExecuteNonQuery()
                         End Using
                     End If
                     Continue For
                 End If
 
-                ' --- Insert new contact ---
                 If contactIdObj Is Nothing OrElse contactIdObj Is DBNull.Value OrElse Convert.ToInt32(contactIdObj) < 0 Then
-                    Dim queryInsert As String = "INSERT INTO Contacts (CustomerID, ContactName, Phone) VALUES (@CustomerID, @ContactName, @Phone)"
-                    Using cmdInsert As New SqlCommand(queryInsert, con)
+                    ' Insert new contact
+                    Using cmdInsert As New SqlCommand("InsertContact", con)
+                        cmdInsert.CommandType = CommandType.StoredProcedure
                         cmdInsert.Parameters.AddWithValue("@CustomerID", CustomerId.Value)
                         cmdInsert.Parameters.AddWithValue("@ContactName", contactName)
                         cmdInsert.Parameters.AddWithValue("@Phone", contactPhone)
                         cmdInsert.ExecuteNonQuery()
                     End Using
                 Else
-                    ' --- Update existing contact ---
-                    Dim contactId As Integer = Convert.ToInt32(contactIdObj)
-                    Dim queryUpdate As String = "UPDATE Contacts SET ContactName=@ContactName, Phone=@Phone WHERE ContactID=@ContactID"
-                    Using cmdUpdate As New SqlCommand(queryUpdate, con)
+                    ' Update existing contact
+                    Using cmdUpdate As New SqlCommand("UpdateContact", con)
+                        cmdUpdate.CommandType = CommandType.StoredProcedure
+                        cmdUpdate.Parameters.AddWithValue("@ContactID", Convert.ToInt32(contactIdObj))
                         cmdUpdate.Parameters.AddWithValue("@ContactName", contactName)
                         cmdUpdate.Parameters.AddWithValue("@Phone", contactPhone)
-                        cmdUpdate.Parameters.AddWithValue("@ContactID", contactId)
                         cmdUpdate.ExecuteNonQuery()
                     End Using
                 End If
@@ -127,6 +128,7 @@ Public Class FrmEditCustomer
         MessageBox.Show("Customer and contacts saved successfully!")
         Me.Close()
     End Sub
+
 
     Private Sub AddContactBtn_Click(sender As Object, e As EventArgs) Handles btnAddContact.Click
         Dim view As DevExpress.XtraGrid.Views.Grid.GridView = CType(GridControl1.MainView, DevExpress.XtraGrid.Views.Grid.GridView)
@@ -156,8 +158,8 @@ Public Class FrmEditCustomer
                 If contactIdObj IsNot Nothing AndAlso contactIdObj IsNot DBNull.Value Then
                     Using con As New SqlConnection(connectionString)
                         con.Open()
-                        Dim queryDelete As String = "DELETE FROM Contacts WHERE ContactID=@ContactID"
-                        Using cmdDelete As New SqlCommand(queryDelete, con)
+                        Using cmdDelete As New SqlCommand("DeleteContact", con)
+                            cmdDelete.CommandType = CommandType.StoredProcedure
                             cmdDelete.Parameters.AddWithValue("@ContactID", Convert.ToInt32(contactIdObj))
                             cmdDelete.ExecuteNonQuery()
                         End Using
