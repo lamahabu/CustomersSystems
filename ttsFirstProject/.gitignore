@@ -1,0 +1,8 @@
+# Visual Studio temporary files
+.vs/
+*.suo
+*.vsidx
+*.user
+*.userosscache
+*.sln.docstates
+
